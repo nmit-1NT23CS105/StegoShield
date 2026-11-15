@@ -1,8 +1,5 @@
 # StegoShield: Steganography Attack & Forensic Detection Toolkit
 
-Cyber Security LA2 project: *Modern Tool usage for Cyber Security and Forensics*
-Kataru Rahul Reddy (1NT23CS105), B.E. CSE, NMIT Bengaluru
-
 StegoShield shows both sides of steganography:
 
 - **Attack side (covert channel):** encrypt a secret message or file with a password (AES via Fernet + PBKDF2) and hide it in the least significant bits (LSB) of a PNG photo. The photo looks exactly the same.
