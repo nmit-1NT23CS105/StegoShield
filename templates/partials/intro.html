@@ -1,0 +1,36 @@
+<section id="screen-intro" class="screen active" aria-label="Start">
+  <div class="hero">
+    <p class="kicker mono">&gt; digital forensics lab_</p>
+    <h1 class="glitch" data-text="StegoShield">StegoShield</h1>
+    <p class="tagline">How a message hides inside a photo, and how an analyst finds it.</p>
+    <button id="start-btn" class="btn btn-big btn-glow">Start Mission &#9654;</button>
+  </div>
+
+  <div id="mode-pick" class="modes hidden" aria-label="Choose a mode">
+    <h2 class="section-title">Choose your mode</h2>
+    <div class="mode-grid">
+      <button class="mode-card glass" data-go="sender" data-key="1">
+        <span class="mode-num mono">1</span>
+        <span class="mode-icon">&#128274;</span>
+        <span class="mode-name">Sender mode</span>
+        <span class="mode-desc">Encrypt a message, hide it in a photo, then reveal it with the password.</span>
+        <span class="mini-steps mono">image &rarr; hide &rarr; reveal</span>
+      </button>
+      <button class="mode-card glass" data-go="analyst" data-key="2">
+        <span class="mode-num mono">2</span>
+        <span class="mode-icon">&#128269;</span>
+        <span class="mode-name">Analyst mode</span>
+        <span class="mode-desc">Scan a suspect image with forensic tests and get a verdict with a report.</span>
+        <span class="mini-steps mono">evidence &rarr; scan &rarr; verdict</span>
+      </button>
+      <button class="mode-card glass" data-go="game" data-key="3">
+        <span class="mode-num mono">3</span>
+        <span class="mode-icon">&#127919;</span>
+        <span class="mode-name">Spot the Secret</span>
+        <span class="mode-desc">Two photos look the same. One carries a secret. Can the class tell which?</span>
+        <span class="mini-steps mono">look &rarr; guess &rarr; reveal</span>
+      </button>
+    </div>
+    <p class="hint">Tip: press <kbd>1</kbd>, <kbd>2</kbd> or <kbd>3</kbd>. Hover any <span class="tip" tabindex="0" data-tip="Short explanations of each idea appear here.">?</span> for a one-line explanation.</p>
+  </div>
+</section>

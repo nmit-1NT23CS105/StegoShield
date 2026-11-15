@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StegoShield | Steganography Forensics Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/screens.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/effects.css') }}">
+</head>
+<body data-demo-password="{{ demo_password }}">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <button class="brand" data-go="intro" aria-label="Back to start">
+      <span class="brand-mark">&#9670;</span> StegoShield
+    </button>
+    <nav class="nav" aria-label="Modes">
+      <button class="nav-btn" data-go="sender">Sender</button>
+      <button class="nav-btn" data-go="analyst">Analyst</button>
+      <button class="nav-btn" data-go="game">Spot the Secret</button>
+    </nav>
+    <span class="lab-tag mono">classroom forensics lab</span>
+  </header>
+
+  <main id="app">
+    {% include "partials/intro.html" %}
+    {% include "partials/sender.html" %}
+    {% include "partials/analyst.html" %}
+    {% include "partials/game.html" %}
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <footer class="foot mono">Esc = home &middot; 1 / 2 / 3 = choose mode &middot; works offline</footer>
+
+  <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/pickers.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bg.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/effects.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/intro.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/hide.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/extract.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/forensics.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

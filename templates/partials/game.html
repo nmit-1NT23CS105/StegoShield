@@ -1,0 +1,42 @@
+<section id="screen-game" class="screen" aria-label="Spot the Secret game">
+  <div class="screen-head">
+    <h2 class="section-title">Spot the Secret</h2>
+    <ol class="stepper" id="game-steps">
+      <li data-step="1" class="current"><span>1</span> Look</li>
+      <li data-step="2"><span>2</span> Guess</li>
+      <li data-step="3"><span>3</span> Reveal</li>
+    </ol>
+  </div>
+  <p class="lead">One of these photos is carrying a hidden, encrypted message. Which one?</p>
+
+  <div class="game-grid">
+    <div class="glass card photo-card" id="card-A">
+      <div class="photo"><img src="/samples/secret_demo_A.png" alt="Photo A"><div class="stamp hidden"></div></div>
+      <div class="vote-row">
+        <span class="photo-name">Photo A</span>
+        <button class="btn vote-btn" data-vote="A">Vote A <kbd>A</kbd></button>
+        <span class="votes mono" id="votes-A">0</span>
+      </div>
+    </div>
+    <div class="glass card photo-card" id="card-B">
+      <div class="photo"><img src="/samples/secret_demo_B.png" alt="Photo B"><div class="stamp hidden"></div></div>
+      <div class="vote-row">
+        <span class="photo-name">Photo B</span>
+        <button class="btn vote-btn" data-vote="B">Vote B <kbd>B</kbd></button>
+        <span class="votes mono" id="votes-B">0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions center">
+    <button id="game-reveal" class="btn btn-big btn-glow">Reveal the answer &#9654;</button>
+    <button id="game-reset" class="btn btn-ghost">Play again</button>
+  </div>
+
+  <div id="game-out" class="glass card hidden">
+    <h3 id="game-headline">Analysis</h3>
+    <pre id="game-log" class="terminal"></pre>
+    <h3>Hidden message, decrypted live <span class="tip" tabindex="0" data-tip="The analyst found it; the password then decrypts what was hidden.">?</span></h3>
+    <pre id="game-msg" class="terminal reveal-out"></pre>
+  </div>
+</section>

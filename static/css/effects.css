@@ -1,0 +1,54 @@
+/* Animations: glitch title, shake, scanline, transitions */
+@keyframes screenIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes cardIn { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: none; } }
+@keyframes blink { 50% { opacity: 0; } }
+
+.glitch { position: relative; display: inline-block; text-shadow: 0 0 18px rgba(57,255,136,0.55); }
+.glitch::before, .glitch::after {
+  content: attr(data-text); position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.glitch::before { color: var(--cyan); animation: glitchA 2.6s infinite linear alternate-reverse; left: 3px; }
+.glitch::after { color: #ff3bd4; animation: glitchB 3.1s infinite linear alternate-reverse; left: -3px; }
+@keyframes glitchA {
+  0%, 86% { clip-path: inset(0 0 100% 0); }
+  88% { clip-path: inset(10% 0 60% 0); transform: translateX(-4px); }
+  91% { clip-path: inset(55% 0 20% 0); transform: translateX(5px); }
+  94% { clip-path: inset(30% 0 45% 0); transform: translateX(-2px); }
+  100% { clip-path: inset(0 0 100% 0); }
+}
+@keyframes glitchB {
+  0%, 80% { clip-path: inset(100% 0 0 0); }
+  83% { clip-path: inset(70% 0 5% 0); transform: translateX(4px); }
+  87% { clip-path: inset(20% 0 65% 0); transform: translateX(-5px); }
+  90% { clip-path: inset(45% 0 35% 0); transform: translateX(3px); }
+  100% { clip-path: inset(100% 0 0 0); }
+}
+.btn-glow.pulse { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 40px rgba(57,255,136,0.75); } }
+
+.shake { animation: shake .5s cubic-bezier(.36,.07,.19,.97) both; }
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}
+.flash-red { animation: flashRed .6s ease; }
+@keyframes flashRed { 30% { box-shadow: 0 0 0 4px var(--red), 0 0 50px rgba(255,59,92,0.6); } }
+
+.scanline {
+  position: absolute; left: 0; right: 0; height: 4px; top: 0; z-index: 2;
+  background: var(--green); box-shadow: 0 0 18px 6px rgba(57,255,136,0.7);
+  animation: scan 1.6s ease-in-out infinite alternate;
+}
+.scanline::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 70px; background: linear-gradient(to top, rgba(57,255,136,0.25), transparent); }
+@keyframes scan { from { top: 0; } to { top: calc(100% - 4px); } }
+
+.stamp:not(.hidden) { animation: stampIn .45s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes stampIn { from { opacity: 0; transform: translate(-50%, -50%) rotate(-12deg) scale(2.4); } to { opacity: 1; transform: translate(-50%, -50%) rotate(-12deg) scale(1); } }
+.pop { animation: pop .35s ease; }
+@keyframes pop { 50% { transform: scale(1.35); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

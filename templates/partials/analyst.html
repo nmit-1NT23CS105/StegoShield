@@ -1,0 +1,84 @@
+<section id="screen-analyst" class="screen" aria-label="Analyst mode">
+  <div class="screen-head">
+    <h2 class="section-title">Analyst mode</h2>
+    <ol class="stepper" id="analyst-steps">
+      <li data-step="1" class="current"><span>1</span> Evidence</li>
+      <li data-step="2"><span>2</span> Scan</li>
+      <li data-step="3"><span>3</span> Verdict</li>
+    </ol>
+  </div>
+
+  <div id="an-setup" class="grid-2">
+    <div class="glass card">
+      <h3>Suspect image <span class="tip" tabindex="0" data-tip="The evidence. It is hashed before and after so we prove it was not changed.">?</span></h3>
+      <label class="dropzone" id="an-drop" tabindex="0">
+        <input type="file" id="an-file" accept=".png,.jpg,.jpeg,.bmp" hidden>
+        <img id="an-preview" alt="" class="hidden">
+        <span class="dz-text">Drag a suspect image here or click to browse</span>
+      </label>
+      <p class="small">Or pick a sample:</p>
+      <div class="samples" id="an-samples"></div>
+    </div>
+    <div class="glass card">
+      <h3>Case details <span class="tip" tabindex="0" data-tip="Chain of custody: who handled the evidence, when, and its hash.">?</span></h3>
+      <label class="lbl" for="an-name">Analyst name</label>
+      <input id="an-name" value="Kataru Rahul Reddy" maxlength="60">
+      <label class="lbl" for="an-case">Case ID</label>
+      <input id="an-case" maxlength="40">
+      <ul class="checklist small mono">
+        <li>chi-square attack</li><li>sample pair analysis</li><li>LSB text scan</li>
+        <li>end-of-file check</li><li>metadata + signature</li><li>SHA-256 before / after</li>
+      </ul>
+      <button id="an-btn" class="btn btn-glow">Start scan &#9654;</button>
+    </div>
+  </div>
+
+  <div id="an-scan" class="grid-2 hidden">
+    <div class="glass card">
+      <div class="scan-box"><img id="scan-img" alt="Image being scanned"><div class="scanline"></div></div>
+    </div>
+    <div class="glass card">
+      <h3>Forensic log</h3>
+      <pre id="an-log" class="terminal" aria-live="polite"></pre>
+    </div>
+  </div>
+
+  <div id="an-result" class="hidden">
+    <div class="verdict-row">
+      <div class="glass card gauge-card">
+        <canvas id="gauge" width="420" height="250" aria-label="Threat gauge"></canvas>
+        <div id="verdict-label" class="verdict-label">CLEAN</div>
+        <div class="small mono" id="verdict-score">score 0 / 100</div>
+      </div>
+      <div class="glass card">
+        <h3>Why <span class="tip" tabindex="0" data-tip="Each test adds points. 30+ is Suspicious, 60+ is Stego detected.">?</span></h3>
+        <ul id="reasons" class="reasons"></ul>
+        <div class="facts mono small" id="an-facts"></div>
+        <div class="actions">
+          <a id="report-btn" class="btn btn-glow" download>Download forensic report &#11015;</a>
+          <button id="an-again" class="btn btn-ghost">Scan another</button>
+        </div>
+      </div>
+    </div>
+    <div class="glass card">
+      <h3>Bit-plane: last bit of Red, Green, Blue <span class="tip" tabindex="0" data-tip="Only the last bit of each colour, shown as black or white. Hidden data looks like noise.">?</span></h3>
+      <img id="plane-img" class="plane" alt="LSB bit planes for red, green and blue">
+      <div class="plane-labels mono small"><span>RED</span><span>GREEN</span><span>BLUE</span></div>
+    </div>
+    <div class="grid-2 charts">
+      <div class="glass card">
+        <h3>Chi-square curve <span class="tip" tabindex="0" data-tip="High p-value means pairs like 200/201 are too equal, a sign of LSB embedding.">?</span></h3>
+        <canvas id="chi-chart" width="640" height="380" aria-label="Chi-square chart"></canvas>
+        <p class="small">Red dashed line = 0.95 threshold. Above it means "looks embedded".</p>
+      </div>
+      <div class="glass card">
+        <h3>Suspicion map <span class="tip" tabindex="0" data-tip="Red bands are the parts of the image where embedded data was found.">?</span></h3>
+        <img id="map-img" class="zoomable" alt="Suspicion map">
+      </div>
+    </div>
+    <div class="glass card">
+      <h3>Chain of custody</h3>
+      <table class="hash-table mono small" id="custody"></table>
+    </div>
+  </div>
+</section>

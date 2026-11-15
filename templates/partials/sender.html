@@ -1,0 +1,91 @@
+<section id="screen-sender" class="screen" aria-label="Sender mode">
+  <div class="screen-head">
+    <h2 class="section-title">Sender mode</h2>
+    <ol class="stepper" id="sender-steps">
+      <li data-step="1" class="current"><span>1</span> Choose image</li>
+      <li data-step="2"><span>2</span> Hide message</li>
+      <li data-step="3"><span>3</span> Reveal</li>
+    </ol>
+  </div>
+
+  <!-- HIDE -->
+  <div id="hide-panel" class="panel">
+    <div class="grid-2">
+      <div class="glass card">
+        <h3>1. Cover image <span class="tip" tabindex="0" data-tip="The normal-looking photo that will carry the hidden data.">?</span></h3>
+        <label class="dropzone" id="hide-drop" tabindex="0">
+          <input type="file" id="hide-file" accept=".png,.jpg,.jpeg,.bmp" hidden>
+          <img id="hide-preview" alt="" class="hidden">
+          <span class="dz-text">Drag a photo here or click to browse</span>
+        </label>
+        <p class="small">Or pick a sample:</p>
+        <div class="samples" id="hide-samples"></div>
+      </div>
+      <div class="glass card">
+        <h3>2. Secret + password</h3>
+        <label class="lbl" for="hide-msg">Secret message <span class="tip" tabindex="0" data-tip="Your text is encrypted first, so only the password can read it.">?</span></label>
+        <textarea id="hide-msg" rows="4" maxlength="20000" placeholder="Meet at the library at 4 PM"></textarea>
+        <label class="lbl" for="hide-pw">Password <span class="tip" tabindex="0" data-tip="PBKDF2 turns the password into a 256-bit key; Fernet (AES) encrypts with it.">?</span></label>
+        <input type="password" id="hide-pw" placeholder="stego123" autocomplete="off">
+        <div class="cap">
+          <div class="cap-row"><span>Capacity used <span class="tip" tabindex="0" data-tip="Each colour value can carry 1 hidden bit in its least significant bit (LSB).">?</span></span><span id="cap-text" class="mono">pick an image</span></div>
+          <div class="bar"><div id="cap-bar" class="bar-fill"></div></div>
+        </div>
+        <button id="hide-btn" class="btn btn-glow">Encrypt &amp; Hide &#9654;</button>
+      </div>
+    </div>
+
+    <div id="hide-run" class="glass card hidden">
+      <h3>Hiding in progress</h3>
+      <pre id="hide-log" class="terminal" aria-live="polite"></pre>
+      <div class="bar"><div id="hide-progress" class="bar-fill"></div></div>
+    </div>
+
+    <div id="hide-result" class="glass card hidden">
+      <h3>Can you spot the difference? <span class="tip" tabindex="0" data-tip="Changing 200 to 201 in a colour is invisible to the eye.">?</span></h3>
+      <div class="compare" id="compare" tabindex="0" aria-label="Drag or use arrow keys to compare">
+        <img id="cmp-after" alt="Result image with hidden message">
+        <div class="cmp-top" id="cmp-top"><img id="cmp-before" alt="Original image"></div>
+        <div class="cmp-handle" id="cmp-handle"><span>&#8596;</span></div>
+        <span class="cmp-label left mono">ORIGINAL</span><span class="cmp-label right mono">WITH SECRET</span>
+      </div>
+      <div class="hash-row mono small">
+        <div>SHA-256 original: <span id="sha-orig"></span></div>
+        <div>SHA-256 result:&nbsp;&nbsp; <span id="sha-res"></span></div>
+      </div>
+      <p class="small">Same look, totally different hash. That is how an analyst knows a file was changed.</p>
+      <div class="actions">
+        <a id="hide-download" class="btn" download>Download result PNG &#11015;</a>
+        <button id="to-reveal" class="btn btn-glow">Next: Reveal &#9654;</button>
+        <button id="hide-again" class="btn btn-ghost">Hide another</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVEAL -->
+  <div id="reveal-panel" class="panel hidden">
+    <div class="grid-2">
+      <div class="glass card">
+        <h3>3. Image to unlock</h3>
+        <div class="choice" role="radiogroup" aria-label="Image to unlock">
+          <button class="chip active" data-src="result" id="src-result">My result</button>
+          <button class="chip" data-src="sample:secret_demo_B.png">Demo photo B</button>
+          <button class="chip" data-src="sample:stego_short_message.png">Short message demo</button>
+        </div>
+        <div class="reveal-img"><img id="reveal-img" alt="Image to unlock"></div>
+      </div>
+      <div class="glass card" id="reveal-card">
+        <h3>Password <span class="tip" tabindex="0" data-tip="Wrong password = the HMAC check fails, so nothing is decrypted.">?</span></h3>
+        <input type="password" id="reveal-pw" placeholder="type the password" autocomplete="off">
+        <button id="reveal-btn" class="btn btn-glow">Unlock &#128275;</button>
+        <div id="denied" class="denied hidden" role="alert">
+          <strong>ACCESS DENIED</strong>
+          <span>Wrong password. Hint: the demo files use <code class="mono">{{ demo_password }}</code>.</span>
+        </div>
+        <pre id="reveal-out" class="terminal reveal-out hidden" aria-live="polite"></pre>
+        <a id="reveal-file" class="btn hidden" download>Download recovered file</a>
+        <button id="back-hide" class="btn btn-ghost">&#9664; Back to Hide</button>
+      </div>
+    </div>
+  </div>
+</section>
